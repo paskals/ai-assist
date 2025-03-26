@@ -20,46 +20,93 @@ flowchart TD
 ```
 
 ### Core Files (Required)
-1. `projectBrief.md`
-   - Foundation document that shapes all other files
-   - Created at project start if it doesn't exist
-   - Defines core requirements and goals
-   - Source of truth for project scope
 
-2. `productContext.md`
-   - Why this project exists
-   - Problems it solves
-   - How it should work
-   - User experience goals
+#### 1. `projectBrief.md`
 
-3. `activeContext.md`
-   - Current work focus
-   - Recent changes
-   - Next steps
-   - Active decisions and considerations
+> - Foundation document that shapes all other files
+> - Created at project start if it doesn't exist
+> - Defines core requirements and goals
+> - Source of truth for project scope
+> - Should only be modified if project scope changes signifficantly
 
-4. `systemPatterns.md`
-   - System architecture
-   - Key technical decisions
-   - Design patterns in use
-   - Component relationships
-
-5. `techContext.md`
-   - Technologies used
-   - Development setup
-   - Technical constraints
-   - Dependencies
-
-6. `progress.md`
-   - What works
-   - What's left to build
-   - Current status
-   - Known issues
-
-**Important:** The projectBrief might contain a lot of information at project start (technical, business, etc.). Much of this information should be used to generate the rest of the memory bank. After the memory bank is defined, ensure that the projectBrief file does not contain any duplicate information. This is essential, in order to reduce the API cost and context window for each request to AI assistants' APIs.
+The `projectBrief.md` might contain a lot of information at project start (technical, business, etc.). Much of this information should be used to generate the rest of the memory bank. After the memory bank files are defined, ensure that the projectBrief file does not contain any duplicate information. This is essential, in order to reduce the API cost and context window for each request to AI assistants' APIs.
 - Summarize chapters if already covered in other memory bank files
 - Reference other memory bank files
 - Keep essential information, and summarize the rest (e.g. if we are implementing the database for the project, we don't need to have too much context about the frontend tech stack).
+
+#### 2. `productContext.md`
+> - Why this project exists
+> - Problems it solves
+> - How it should work
+> - User experience goals
+> - Should only change if scope changes signifficantly
+
+#### 3. `activeContext.md`
+> - Current work focus
+> - Recent changes
+> - Next steps
+> - Active decisions and considerations
+> - Should be reviewed after every task and updated after every task
+
+The `activeContext.md` file should contain more detailed tasks - recently done, ongoing, and ucoming. It does not need to contain all individual tasks from start to end, but rather the current work scope within the current development phase plus upcoming next steps. `progress.md` is used for tracking overall project progress on a higher level.
+
+#### 4. `systemPatterns.md`
+> - System architecture
+> - Key technical decisions
+> - Design patterns in use
+> - Component relationships
+
+#### 5. `techContext.md`
+> - Technologies used
+> - Development setup
+> - Technical constraints
+> - Dependencies
+
+#### 6. `progress.md`
+> - What works
+> - What's left to build
+> - Current status
+> - Known issues
+> - Should be reviewed after every task and updated when needed
+
+The `progress.md` file should contain a high-level overview of progress on the total project.
+
+At the top of this file there should be a chapter summarizing the current development phase (see explanation below) and showing a gantt chart with the major phases defined as sections, and major steps/milestones defined in time. See below example:
+
+```mermaid
+gantt
+    title Web Application Development Lifecycle
+    dateFormat  YYYY-MM-DD
+    axisFormat %y%W
+    
+    section Early Prototyping
+    Define core user stories       :a1, 2025-04-01, 7d
+    Initialize memory bank         :a2, after a1, 5d
+    Develop key functionality MVP  :a3, after a2, 14d
+    Review prototype with stakeholders :a4, after a3, 3d
+    
+    section Alpha
+    Implement core features        :b1, after a4, 14d
+    Set up CI/CD pipeline          :b2, after b1, 7d
+    Create initial test suite      :b3, after b1, 10d
+    Refine user interface          :b4, after b1, 12d
+    
+    section Beta
+    Fix critical bugs              :c1, after b4, 10d
+    Optimize performance           :c2, after c1, 7d
+    Conduct user testing           :c3, after c1, 14d
+    Implement feedback changes     :c4, after c3, 10d
+    
+    section Release v1.0
+    Finalize documentation         :d1, after c4, 7d
+    Security audit                 :d2, after c4, 10d
+    Deploy to production           :d3, after d1 d2, 3d
+    Launch marketing               :d4, after d3, 5d
+```
+
+Timings do not need to be precise, and should be there only to show the relative effort for each task (duration).
+
+This overview should be kept up to date when major progress milestones are achieved and when scope changes signifficantly.
 
 ### Additional Context
 Create additional files/folders within memory-bank/ when they help organize:
@@ -209,6 +256,7 @@ When maintaining or creating .clinerules, always track the current project phase
    - Test coverage should increase to include important edge cases
 
 **Implementation Approach:**
+- Consider the current development phase
 - Balance between innovation and stability
 - Consider implementation impact more carefully
 - Provide clear migration paths when suggesting breaking changes
