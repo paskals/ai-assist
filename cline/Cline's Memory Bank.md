@@ -56,6 +56,11 @@ flowchart TD
    - Current status
    - Known issues
 
+**Important:** The projectBrief might contain a lot of information at project start (technical, business, etc.). Much of this information should be used to generate the rest of the memory bank. After the memory bank is defined, ensure that the projectBrief file does not contain any duplicate information. This is essential, in order to reduce the API cost and context window for each request to AI assistants' APIs.
+- Summarize chapters if already covered in other memory bank files
+- Reference other memory bank files
+- Keep essential information, and summarize the rest (e.g. if we are implementing the database for the project, we don't need to have too much context about the frontend tech stack).
+
 ### Additional Context
 Create additional files/folders within memory-bank/ when they help organize:
 - Complex feature documentation
@@ -304,4 +309,3 @@ When describing tasks or statuses of work items, always use proper markdown form
 - [ ] Should signify a pending task
 - [~] Should signify an ongoing task
 - [x] Should signify a completed task
-
